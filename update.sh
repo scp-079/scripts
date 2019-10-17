@@ -14,7 +14,7 @@ git pull
 
 if [ "$bot" = "recheck" ]; then
 	eval "$(conda shell.bash hook)"
-	conda activate scp-079
+	conda activate recheck
 	pip install -r requirements.txt
 	conda deactivate
 else
