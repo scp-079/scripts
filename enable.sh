@@ -5,3 +5,6 @@ for bot in $(ls ~/scp-079); do
 		systemctl --user enable $bot
 	fi
 done
+
+systemctl --user enable restart.timer
+systemctl --user start restart.timer
