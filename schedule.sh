@@ -1,7 +1,7 @@
 #!/bin/bash
 
 for bot in $(ls ~/scp-079); do
-	if [ "$bot" != "conda" ] && [ "$bot" != "scripts" ] && [ "$bot" != "venv" ]; then
+	if [ "$bot" != "scripts" ] && [ "$bot" != "venv" ] && ! [[ "$bot" =~ ^(conda)$ ]]; then
 		systemctl --user restart $bot
 	fi
 done
