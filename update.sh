@@ -12,16 +12,9 @@ cd ~/scp-079/$bot
 
 git pull
 
-if [ "$bot" = "recheck" ]; then
-	eval "$(conda shell.bash hook)"
-	conda activate recheck
-	pip install -r requirements.txt
-	conda deactivate
-else
-	source ~/scp-079/venv/bin/activate
-	pip install -r requirements.txt
-	deactivate
-fi
+source ~/scp-079/venv/bin/activate
+pip install -r requirements.txt
+deactivate
 
 systemctl --user restart $bot
 
