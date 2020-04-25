@@ -3,16 +3,16 @@
 echo -e "\n\033[0;32mUpdating the bot...\033[0m\n"
 
 if [ $# -eq 1 ]; then
-	bot=$1
+    bot=$1
 else
-	read -p "Choose a bot: " bot
+    read -p "Choose a bot: " bot
 fi
 
 cd ~/scp-079/$bot
 
 git pull
 
-source ~/scp-079/venv/bin/activate
+source venv/bin/activate
 pip install -r requirements.txt
 deactivate
 
