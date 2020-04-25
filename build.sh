@@ -1,16 +1,13 @@
 #!/bin/bash
 
-if [ $# -eq 1 ];then
-    bot=$1
-else
-    read -p "Choose a bot: " bot
-fi
+read -p "Project: " project
+read -p "Name: " name
 
 mkdir -p ~/scp-079
-git clone https://github.com/scp-079/scp-079-$bot.git ~/scp-079/$bot
-cd ~/scp-079/$bot
+git clone https://github.com/scp-079/scp-079-$project.git ~/scp-079/$name
+cd ~/scp-079/$name
 
-if [ "$bot" != "noporn" ]; then
+if [ "$project" != "noporn" ]; then
     python3 -m venv venv
 else
     python3 -m venv --system-site-packages venv
@@ -29,17 +26,17 @@ vim config.ini
 mkdir -p ~/.config/systemd/user
 
 echo "[Unit]
-Description=SCP-079-${bot^^} Telegram Bot Service
+Description=SCP-079-${project^^} Telegram Bot {$name^^} Service
 After=default.target
 
 [Service]
-WorkingDirectory=/home/`whoami`/scp-079/$bot
-ExecStart=/home/`whoami`/scp-079/$bot/venv/bin/python main.py
+WorkingDirectory=/home/`whoami`/scp-079/$name
+ExecStart=/home/`whoami`/scp-079/$name/venv/bin/python main.py
 Restart=on-abort
 
 [Install]
 WantedBy=default.target
-" > ~/.config/systemd/user/$bot.service
+" > ~/.config/systemd/user/$name.service
 
 systemctl --user daemon-reload
-systemctl --user enable $bot
+systemctl --user enable $name
