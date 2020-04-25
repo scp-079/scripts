@@ -6,15 +6,15 @@ read -p "Name: " name
 mkdir -p ~/scp-079
 cd ~/scp-079
 
-if ! test -d "$name"; then
+if [ ! -d "$name" ]; then
     git clone https://github.com/scp-079/scp-079-$project.git $name
 fi
 
 cd $name
 
-if [ "$project" != "noporn" ]; then
+if [ ! -d "venv" ] && [ "$project" != "noporn" ]; then
     python3 -m venv venv
-else
+elif [ ! -d "venv" ]; then
     python3 -m venv --system-site-packages venv
 fi
 
@@ -22,7 +22,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 deactivate
 
-if ! test -f "config.ini"; then
+if [ ! -f "config.ini" ]; then
     cp config.ini.example config.ini
 fi
 
