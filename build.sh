@@ -16,7 +16,9 @@ else
     git pull
 fi
 
-echo -e "\n\033[0;32mCreating the virtual environment...\033[0m\n"
+if [ ! -d "venv" ]; then
+    echo -e "\n\033[0;32mCreating the virtual environment...\033[0m\n"
+fi
 
 if [ ! -d "venv" ] && [ "$project" != "noporn" ]; then
     python3 -m venv venv
