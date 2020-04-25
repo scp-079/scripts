@@ -31,7 +31,7 @@ vim config.ini
 mkdir -p ~/.config/systemd/user
 
 echo "[Unit]
-Description=SCP-079-${project^^} Telegram Bot {$name^^} Service
+Description=SCP-079-${project^^} Telegram Bot ${name^^} Service
 After=default.target
 
 [Service]
