@@ -4,8 +4,13 @@ read -p "Project: " project
 read -p "Name: " name
 
 mkdir -p ~/scp-079
-git clone https://github.com/scp-079/scp-079-$project.git ~/scp-079/$name
-cd ~/scp-079/$name
+cd ~/scp-079
+
+if ! test -d "$name"; then
+    git clone https://github.com/scp-079/scp-079-$project.git $name
+fi
+
+cd $name
 
 if [ "$project" != "noporn" ]; then
     python3 -m venv venv
