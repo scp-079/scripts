@@ -16,13 +16,11 @@ else
     git pull
 fi
 
-if [ ! -d "venv" ]; then
-    echo -e "\n\033[0;32mCreating the virtual environment...\033[0m\n"
-fi
-
 if [ ! -d "venv" ] && [ "$project" != "noporn" ]; then
+    echo -e "\n\033[0;32mCreating the virtual environment without system site packages...\033[0m\n"
     python3 -m venv venv
 elif [ ! -d "venv" ]; then
+    echo -e "\n\033[0;32mCreating the virtual environment with system site packages...\033[0m\n"
     python3 -m venv --system-site-packages venv
 fi
 
