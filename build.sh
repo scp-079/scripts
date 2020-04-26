@@ -17,10 +17,10 @@ else
 fi
 
 if [ ! -d "venv" ] && [ "$project" != "noporn" ]; then
-    echo -e "\n\033[0;32mCreating the virtual environment without system site packages...\033[0m\n"
+    echo -e "\n\033[0;32mCreating the virtual environment without system site packages...\033[0m"
     python3 -m venv venv
 elif [ ! -d "venv" ]; then
-    echo -e "\n\033[0;32mCreating the virtual environment with system site packages...\033[0m\n"
+    echo -e "\n\033[0;32mCreating the virtual environment with system site packages...\033[0m"
     python3 -m venv --system-site-packages venv
 fi
 
@@ -37,7 +37,7 @@ fi
 vim config.ini
 
 echo -e "\n\033[0;32mConfig updated!\033[0m\n"
-echo -e "\n\033[0;32mEnabling the systemd service...\033[0m\n"
+echo -e "\033[0;32mEnabling the systemd service...\033[0m\n"
 
 mkdir -p ~/.config/systemd/user
 
