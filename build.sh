@@ -27,6 +27,8 @@ fi
 echo -e "\n\033[0;32mInstalling the requirements...\033[0m\n"
 
 source venv/bin/activate
+pip install -U pip
+pip install -U setuptools wheel
 pip install -r requirements.txt
 deactivate
 

@@ -13,6 +13,8 @@ cd ~/scp-079/$bot
 git pull
 
 source venv/bin/activate
+pip install -U pip
+pip install -U setuptools wheel
 pip install -r requirements.txt
 deactivate
 

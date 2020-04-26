@@ -9,6 +9,8 @@ for bot in $(ls ~/scp-079); do
         git pull
         
         source venv/bin/activate
+        pip install -U pip
+        pip install -U setuptools wheel
         pip install -r requirements.txt
         deactivate
         
