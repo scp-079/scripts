@@ -57,4 +57,5 @@ WantedBy=default.target
 systemctl --user daemon-reload
 systemctl --user enable $name
 
+echo "------------------------"
 echo -e "\n\033[0;32mCompleted!\033[0m\n"
