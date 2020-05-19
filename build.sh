@@ -46,7 +46,7 @@ fi
 
 vim report.txt
 
-echo -e "\n\033[0;32mReport template updated!\033[0m\n"
+echo -e "\033[0;32mReport template updated!\033[0m\n"
 
 echo -e "\033[0;32mEnabling the systemd service...\033[0m\n"
 
