@@ -7,6 +7,7 @@ if [ $# -eq 1 ];then
     systemctl --user disable $bot
     echo -e "\n\033[0;32mBot ${bot^^} Disabled!\033[0m\n"
     exit
+fi
 
 for bot in $(ls ~/scp-079); do
     if [ "$bot" != "scripts" ] && [ "$bot" != "venv" ] && ! [[ "$bot" =~ ^(conda)$ ]]; then
