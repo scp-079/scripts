@@ -44,9 +44,10 @@ if [ -f "template.txt" ] && [ ! -f "report.txt" ]; then
     cp template.txt report.txt
 fi
 
-vim report.txt
-
-echo -e "\033[0;32mReport template updated!\033[0m\n"
+if [ -f "report.txt" ]; then
+    vim report.txt
+    echo -e "\033[0;32mReport template updated!\033[0m\n"
+fi
 
 echo -e "\033[0;32mEnabling the systemd service...\033[0m\n"
 
