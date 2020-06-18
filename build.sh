@@ -108,6 +108,7 @@ build_begin() {
 }
 
 build_end() {
+    cd ~
     echo "------------------------"
     echo -e "\n\033[0;32mCompleted!\033[0m\n"  
 }
