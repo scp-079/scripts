@@ -62,7 +62,7 @@ bot_config() {
         cp config.ini.example config.ini
     fi
 
-    config $name
+    bash ~/scp-079/scripts/config.sh $name
 
     echo -e "\n\033[0;32mConfig updated!\033[0m\n"
 
