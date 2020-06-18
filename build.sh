@@ -70,6 +70,16 @@ bot_config() {
         cp config.ini.example config.ini
     fi
 
+    cd ~/scp-079/scripts || exit
+
+    if [ ! -f ~/scp-079/scripts/config.ini ]; then
+        cp ~/scp-079/"$name"/config.ini config.ini
+    fi
+
+    source venv/bin/activate
+    python config.py "$name"
+    deactivate
+
     bash ~/scp-079/scripts/config.sh "$name"
 
     echo -e "\n\033[0;32mConfig updated!\033[0m\n"

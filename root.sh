@@ -12,6 +12,7 @@ echo -e "\033[0;32m\nEnabling linger for user scp...\033[0m\n"
 loginctl enable-linger scp
 
 echo -e "\033[0;32m\nInstalling basic tools...\033[0m\n"
+apt update
 apt install build-essential git python3-dev python3-venv vim -y
 
 echo -e "\033[0;32m\nInstalling dependencies...\033[0m\n"
