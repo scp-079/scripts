@@ -1,6 +1,9 @@
 #!/bin/bash
 
-echo -e "\n\033[0;32mUpdating the bot...\033[0m\n"
+NOCOLOR="\033[0m"
+GREEN="\033[0;32m"
+
+echo -e "\n${GREEN}Updating the bot...${NOCOLOR}\n"
 
 if [ $# -eq 1 ]; then
     bot=$1
@@ -20,4 +23,4 @@ deactivate
 
 systemctl --user restart "$bot"
 
-echo -e "\n\033[0;32mBot ${bot^^} Updated!\033[0m\n"
+echo -e "\n${GREEN}Bot ${bot^^} Updated!${NOCOLOR}\n"

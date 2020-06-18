@@ -1,11 +1,14 @@
 #!/bin/bash
 
+NOCOLOR="\033[0m"
+GREEN="\033[0;32m"
+
 shopt -s nullglob
 for bot in ~/scp-079/*; do
     if [ "$bot" != "scripts" ] && [ "$bot" != "venv" ] && ! [[ "$bot" =~ ^(conda)$ ]]; then
-        echo -e "\n\033[0;32mStopping the bot ${bot^^}...\033[0m\n"
+        echo -e "\n${GREEN}Stopping the bot ${bot^^}...${NOCOLOR}\n"
         systemctl --user stop "$bot"
-        echo -e "\n\033[0;32mBot ${bot^^} Stopped!\033[0m\n"
+        echo -e "\n${GREEN}Bot ${bot^^} Stopped!${NOCOLOR}\n"
     fi
 done
 shopt -u nullglob

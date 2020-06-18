@@ -1,6 +1,9 @@
 #!/bin/bash
 
-echo -e "\n\033[0;32mUpdating the scripts...\033[0m\n"
+NOCOLOR="\033[0m"
+GREEN="\033[0;32m"
+
+echo -e "\n${GREEN}Updating the scripts...${NOCOLOR}\n"
 cd ~/scp-079/scripts || exit
 git pull
 python3 -m venv venv
@@ -13,7 +16,7 @@ deactivate
 shopt -s nullglob
 for bot in ~/scp-079/*; do
     if [ "$bot" != "scripts" ] && [ "$bot" != "venv" ] && ! [[ "$bot" =~ ^(conda)$ ]]; then
-        echo -e "\n\033[0;32mUpdating the bot ${bot^^}...\033[0m\n"
+        echo -e "\n${GREEN}Updating the bot ${bot^^}...${NOCOLOR}\n"
         
         cd ~/scp-079/"$bot" || exit
         
@@ -27,7 +30,7 @@ for bot in ~/scp-079/*; do
         
         systemctl --user restart "$bot"
         
-        echo -e "\n\033[0;32mBot ${bot^^} Updated!\033[0m\n"
+        echo -e "\n${GREEN}Bot ${bot^^} Updated!${NOCOLOR}\n"
     fi
 done
 shopt -u nullglob
