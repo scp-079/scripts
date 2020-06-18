@@ -5,10 +5,10 @@ if [ ! $(id -u) -eq 0 ]; then
 	exit
 fi
 
-echo -e '\033[0;32m\nWe will add a user called "scp", please set a strong password...\n\033[0m\n'
+echo -e '\033[0;32m\nWe will add a user called "scp", please set a strong password...\033[0m\n'
 adduser --gecos "" scp
 
-echo -e "\033[0;32mEnabling linger for user scp...\033[0m\n"
+echo -e "\033[0;32m\nEnabling linger for user scp...\033[0m\n"
 loginctl enable-linger scp
 
 echo -e "\033[0;32mInstalling basic tools...\033[0m\n"
