@@ -22,6 +22,9 @@ def main() -> bool:
     result = False
 
     try:
+        # Print welcome message
+        print("\nRunning config.py...\n")
+
         # Init
         default = "[DATA EXPUNGED]"
         replace_dict = {}
@@ -96,6 +99,9 @@ def main() -> bool:
         # Write global config.ini
         with open(global_path, "w") as f:
             global_config.write(f)
+
+        # Print goodbye message
+        print("\nDone config.py!\n")
 
         result = True
     except Exception as e:
