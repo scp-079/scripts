@@ -15,6 +15,7 @@ deactivate
 
 shopt -s nullglob
 for bot in ~/scp-079/*; do
+    bot=$(basename "$bot")
     if [ "$bot" != "scripts" ] && [ "$bot" != "venv" ] && ! [[ "$bot" =~ ^(conda)$ ]]; then
         echo -e "\n${GREEN}Updating the bot ${bot^^}...${NOCOLOR}\n"
         
