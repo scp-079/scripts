@@ -79,28 +79,36 @@ bot_config() {
         cp config.ini.example config.ini
     fi
 
-    cd ~/scp-079/scripts || exit
-
     if [ ! -f ~/scp-079/scripts/config.ini ]; then
-        cp ~/scp-079/"$name"/config.ini config.ini
+        cp config.ini ~/scp-079/scripts/config.ini
     fi
 
+    cd ~/scp-079/scripts || exit
     source venv/bin/activate
     python config.py "$name"
     deactivate
 
+    cd ~/scp-079/"$name" || exit
     bash ~/scp-079/scripts/config.sh "$name"
-
     echo -e "\n${GREEN}Config updated!${NOCOLOR}\n"
 
-    if [ -f "template.txt" ] && [ ! -f "report.txt" ]; then
-        cp template.txt report.txt
+    if [ -f "report.txt.example" ] && [ ! -f "report.txt" ]; then
+        cp report.txt.example report.txt
     fi
 
     if [ -f "report.txt" ]; then
         vim report.txt
         echo -e "${GREEN}Report template updated!${NOCOLOR}\n"
-    fi  
+    fi
+    
+    if [ -f "start.txt.example" ] && [ ! -f "start.txt" ]; then
+        cp start.txt.example start.txt
+    fi
+
+    if [ -f "start.txt" ]; then
+        vim start.txt
+        echo -e "${GREEN}Start template updated!${NOCOLOR}\n"
+    fi
 }
 
 enable_service() {
