@@ -6,18 +6,7 @@ if [ ! $(id -u) -eq 0 ]; then
 fi
 
 echo -e '\nWe will add a user called "scp", please set a strong password.\n'
-read -p "Password: " password
-read -p "Type password again: " password2
-while [ "$password" != "$password2" ];
-do
-    echo 
-    echo "Sorry, passwords do not match, please try again"
-    read -p "Password: " password
-    echo
-    read -p "Type password again: " password2
-done
-adduser --disabled-password --gecos "" scp
-echo "scp:$password" | chpasswd
+adduser --gecos "" scp
 
 echo -e "\033[0;32mEnabling linger for user scp...\033[0m\n"
 loginctl enable-linger scp
