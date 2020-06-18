@@ -13,10 +13,10 @@ fi
 echo -e "\nWe will add a user called ${YELLOW}scp${NOCOLOR}, please set a strong password...\n"
 adduser --gecos "" scp
 
-echo -e "\n${GREEN}Enabling linger for user scp...${NOCOLOR}"
+echo -e "\n${GREEN}Enabling linger for user scp...${NOCOLOR}\n"
 loginctl enable-linger scp
 
-echo -e "\n${GREEN}Installing basic tools...${NOCOLOR}\n"
+echo -e "${GREEN}Installing basic tools...${NOCOLOR}\n"
 apt update
 apt install build-essential git python3-dev python3-venv vim -y
 
