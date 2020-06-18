@@ -13,7 +13,7 @@ fi
 echo -e "\nWe will add a user called ${YELLOW}scp${NOCOLOR}, please set a strong password...\n"
 adduser --gecos "" scp
 
-echo -e "\n${GREEN}Enabling linger for user scp...${NOCOLOR}\n"
+echo -e "\n${GREEN}Enabling linger for user scp...${NOCOLOR}"
 loginctl enable-linger scp
 
 echo -e "\n${GREEN}Installing basic tools...${NOCOLOR}\n"
