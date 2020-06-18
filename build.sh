@@ -1,16 +1,16 @@
 #!/bin/bash
 
 mkdir -p ~/scp-079
-cd ~/scp-079
+cd ~/scp-079 || exit
 
 update_scripts() {
     echo -e "\n\033[0;32mUpdating the scripts...\033[0m\n"
 
     if [ ! -d "scripts" ]; then
         git clone https://github.com/scp-079/scripts.git scripts
-        cd scripts
+        cd scripts || exit
     else
-        cd scripts
+        cd scripts || exit
         git pull
     fi
     
@@ -18,23 +18,24 @@ update_scripts() {
 }
 
 set_env() {
+    # shellcheck source=./env.sh
     source ~/scp-079/scripts/env.sh
 }
 
 project_config() {
     echo ""
-    read -p "Project: " project
-    read -p "Name: " name
+    read -r -p "Project: " project
+    read -r -p "Name: " name
 }
 
 git_clone() {
     echo -e "\n\033[0;32mCloning the project ${project^^}...\033[0m\n"
     
     if [ ! -d "$name" ]; then
-        git clone https://github.com/scp-079/scp-079-$project.git $name
-        cd $name
+        git clone https://github.com/scp-079/scp-079-"$project".git "$name"
+        cd "$name" || exit
     else
-        cd $name
+        cd "$name" || exit
         git pull
     fi
 }
@@ -62,7 +63,7 @@ bot_config() {
         cp config.ini.example config.ini
     fi
 
-    bash ~/scp-079/scripts/config.sh $name
+    bash ~/scp-079/scripts/config.sh "$name"
 
     echo -e "\n\033[0;32mConfig updated!\033[0m\n"
 
@@ -84,17 +85,17 @@ Description=SCP-079-${project^^} Telegram Bot ${name^^} Service
 After=default.target
 
 [Service]
-WorkingDirectory=/home/`whoami`/scp-079/$name
-ExecStart=/home/`whoami`/scp-079/$name/venv/bin/python main.py
+WorkingDirectory=/home/$(whoami)/scp-079/$name
+ExecStart=/home/$(whoami)/scp-079/$name/venv/bin/python main.py
 Restart=on-abort
 
 [Install]
-WantedBy=default.target" > ~/.config/systemd/user/$name.service
+WantedBy=default.target" > ~/.config/systemd/user/"$name".service
 
     echo -e "\033[0;32mEnabling the systemd service...\033[0m\n"
 
     systemctl --user daemon-reload
-    systemctl --user enable $name
+    systemctl --user enable "$name"
 }
 
 build_begin() {
@@ -108,7 +109,7 @@ build_begin() {
 }
 
 build_end() {
-    cd ~
+    cd ~ || exit
     echo "------------------------"
     echo -e "\n\033[0;32mCompleted!\033[0m\n"  
 }
