@@ -1,7 +1,23 @@
 #!/bin/bash
 
-echo -e "\nWe will add a user called scp, please set a strong password:\n"
-adduser scp
+if [ ! $(id -u) -eq 0 ]; then
+	echo "Please run the script as root user!"
+	exit
+fi
+
+echo -e '\nWe will add a user called "scp", please set a strong password.\n'
+read -p "Password: " password
+read -p "Type password again: " password2
+while [ "$password" != "$password2" ];
+do
+    echo 
+    echo "Sorry, passwords do not match, please try again"
+    read -p "Password: " password
+    echo
+    read -p "Type password again: " password2
+done
+adduser --disabled-password --gecos "" scp
+echo "scp:$password" | chpasswd
 
 echo -e "\033[0;32mEnabling linger for user scp...\033[0m\n"
 loginctl enable-linger scp

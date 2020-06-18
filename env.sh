@@ -24,8 +24,8 @@ alias show="bash ~/scp-079/scripts/show.sh"
 alias shut="bash ~/scp-079/scripts/shut.sh"
 alias upgrade="bash ~/scp-079/scripts/upgrade.sh"
 
-touch ~/.bash_profile
+touch ~/.bashrc
 
-if ! grep -q "source ~/scp-079/scripts/env.sh" "~/.bash_profile"; then
-    echo "source ~/scp-079/scripts/env.sh" >> ~/.bash_profile
+if ! grep -q "source ~/scp-079/scripts/env.sh" ~/.bashrc; then
+    echo "source ~/scp-079/scripts/env.sh" >> ~/.bashrc
 fi
