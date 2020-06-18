@@ -1,5 +1,15 @@
 #!/bin/bash
 
+echo -e "\n\033[0;32mUpdating the scripts...\033[0m\n"
+cd ~/scp-079/scripts || exit
+git pull
+python3 -m venv venv
+source venv/bin/activate
+pip install -U pip
+pip install -U setuptools wheel
+pip install -r requirements.txt
+deactivate
+
 shopt -s nullglob
 for bot in ~/scp-079/*; do
     if [ "$bot" != "scripts" ] && [ "$bot" != "venv" ] && ! [[ "$bot" =~ ^(conda)$ ]]; then
