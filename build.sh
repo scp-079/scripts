@@ -2,7 +2,7 @@
 
 if [ "$(id -u)" -eq 0 ]; then
 	echo "Please DO NOT run the script as root user!"
-	exit
+	return
 fi
 
 mkdir -p ~/scp-079
