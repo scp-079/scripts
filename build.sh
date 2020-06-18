@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [ "$(id -u)" -eq 0 ]; then
+	echo "Please DO NOT run the script as root user!"
+	exit
+fi
+
 mkdir -p ~/scp-079
 cd ~/scp-079 || exit
 
