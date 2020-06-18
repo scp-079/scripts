@@ -9,6 +9,7 @@ alias venv="source ~/scp-079/scripts/venv.sh"
 
 alias config="bash ~/scp-079/scripts/config.sh"
 alias log="bash ~/scp-079/scripts/log.sh"
+alias global="bash ~/scp-079/scripts/global.sh"
 alias restart="bash ~/scp-079/scripts/restart.sh"
 alias status="bash ~/scp-079/scripts/status.sh"
 alias start="bash ~/scp-079/scripts/start.sh"
