@@ -1,7 +1,12 @@
 #!/bin/bash
 
+NOCOLOR="\033[0m"
+RED="\033[0;31m"
+GREEN="\033[0;32m"
+YELLOW="\033[1;33m"
+
 if [ "$(id -u)" -eq 0 ]; then
-	echo "Please DO NOT run the script as root user!"
+	echo -e "\n${RED}Please DO NOT run the script as root user!${NOCOLOR}\n"
 	return
 fi
 
@@ -9,7 +14,7 @@ mkdir -p ~/scp-079
 cd ~/scp-079 || exit
 
 update_scripts() {
-    echo -e "\n\033[0;32mUpdating the scripts...\033[0m\n"
+    echo -e "\n${GREEN}Updating the scripts...${NOCOLOR}\n"
 
     if [ ! -d "scripts" ]; then
         git clone https://github.com/scp-079/scripts.git scripts
@@ -36,12 +41,12 @@ set_env() {
 
 project_config() {
     echo ""
-    read -r -p "Project: " project
-    read -r -p "Name: " name
+    read -r -p "${YELLOW}Project: ${NOCOLOR}" project
+    read -r -p "${YELLOW}Name: ${NOCOLOR}" name
 }
 
 git_clone() {
-    echo -e "\n\033[0;32mCloning the project ${project^^}...\033[0m\n"
+    echo -e "\n${GREEN}Cloning the project ${project^^}...${NOCOLOR}\n"
     
     if [ ! -d "$name" ]; then
         git clone https://github.com/scp-079/scp-079-"$project".git "$name"
@@ -54,14 +59,14 @@ git_clone() {
 
 create_venv() {
     if [ ! -d "venv" ] && [ "$project" != "noporn" ]; then
-        echo -e "\n\033[0;32mCreating the virtual environment without system site packages...\033[0m"
+        echo -e "\n${GREEN}Creating the virtual environment without system site packages...${NOCOLOR}"
         python3 -m venv venv
     elif [ ! -d "venv" ]; then
-        echo -e "\n\033[0;32mCreating the virtual environment with system site packages...\033[0m"
+        echo -e "\n${GREEN}Creating the virtual environment with system site packages...${NOCOLOR}"
         python3 -m venv --system-site-packages venv
     fi
 
-    echo -e "\n\033[0;32mInstalling the requirements...\033[0m\n"
+    echo -e "\n${GREEN}Installing the requirements...${NOCOLOR}\n"
 
     source venv/bin/activate
     pip install -U pip
@@ -87,7 +92,7 @@ bot_config() {
 
     bash ~/scp-079/scripts/config.sh "$name"
 
-    echo -e "\n\033[0;32mConfig updated!\033[0m\n"
+    echo -e "\n${GREEN}Config updated!${NOCOLOR}\n"
 
     if [ -f "template.txt" ] && [ ! -f "report.txt" ]; then
         cp template.txt report.txt
@@ -95,7 +100,7 @@ bot_config() {
 
     if [ -f "report.txt" ]; then
         vim report.txt
-        echo -e "\033[0;32mReport template updated!\033[0m\n"
+        echo -e "${GREEN}Report template updated!${NOCOLOR}\n"
     fi  
 }
 
@@ -114,7 +119,7 @@ Restart=on-abort
 [Install]
 WantedBy=default.target" > ~/.config/systemd/user/"$name".service
 
-    echo -e "\033[0;32mEnabling the systemd service...\033[0m\n"
+    echo -e "${GREEN}Enabling the systemd service...${NOCOLOR}\n"
 
     systemctl --user daemon-reload
     systemctl --user enable "$name"
@@ -133,7 +138,7 @@ build_begin() {
 build_end() {
     cd ~ || exit
     echo "------------------------"
-    echo -e "\n\033[0;32mCompleted!\033[0m\n"  
+    echo -e "\n${GREEN}Completed!${NOCOLOR}\n"
 }
 
 build_begin
