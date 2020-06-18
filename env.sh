@@ -13,6 +13,7 @@ alias restart="bash ~/scp-079/scripts/restart.sh"
 alias status="bash ~/scp-079/scripts/status.sh"
 alias start="bash ~/scp-079/scripts/start.sh"
 alias stop="bash ~/scp-079/scripts/stop.sh"
+alias try="bash ~/scp-079/scripts/try.sh"
 alias update="bash ~/scp-079/scripts/update.sh"
 
 alias check="bash ~/scp-079/scripts/check.sh"
