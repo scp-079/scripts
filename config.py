@@ -101,7 +101,7 @@ def main() -> bool:
             global_config.write(f)
 
         # Print goodbye message
-        print("\nDone config.py!\n")
+        print("\nDone config.py!")
 
         result = True
     except Exception as e:
