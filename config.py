@@ -69,13 +69,17 @@ def main() -> bool:
                     if key not in {"key", "password"}:
                         value = ""
                         while not value:
-                            value = input(f"Please input the value of [{section}] {key}: ")
+                            value = input(f"Please input [{section}] {key}: ")
                     elif key == "key":
                         value = generate_key()
                     elif key == "password":
                         value = generate_password()
                     else:
                         value = "[DATA EXPUNGED]"
+                elif key == "bot_token":
+                    value = ""
+                    while not value:
+                        value = input(f"Please input [{section}] {key}: ")
                 else:
                     value = global_config[section][key]
 
