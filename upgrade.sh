@@ -1,10 +1,11 @@
 #!/bin/bash
 
-for bot in $(ls ~/scp-079); do
+shopt -s nullglob
+for bot in ~/scp-079/*; do
     if [ "$bot" != "scripts" ] && [ "$bot" != "venv" ] && ! [[ "$bot" =~ ^(conda)$ ]]; then
         echo -e "\n\033[0;32mUpdating the bot ${bot^^}...\033[0m\n"
         
-        cd ~/scp-079/$bot
+        cd ~/scp-079/"$bot" || exit
         
         git pull
         
@@ -14,8 +15,9 @@ for bot in $(ls ~/scp-079); do
         pip install -r requirements.txt
         deactivate
         
-        systemctl --user restart $bot
+        systemctl --user restart "$bot"
         
         echo -e "\n\033[0;32mBot ${bot^^} Updated!\033[0m\n"
     fi
 done
+shopt -u nullglob

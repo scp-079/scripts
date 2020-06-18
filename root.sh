@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ ! $(id -u) -eq 0 ]; then
+if [ ! "$(id -u)" -eq 0 ]; then
 	echo "Please run the script as root user!"
 	exit
 fi

@@ -3,9 +3,9 @@
 if [ $# -eq 1 ];then
     bot=$1
 else
-    read -p "Choose a bot: " bot
+    read -r -p "Choose a bot: " bot
 fi
 
-cd ~/scp-079/$bot
+cd ~/scp-079/"$bot" || exit
 
 vim config.ini
