@@ -1,10 +1,17 @@
 #!/bin/bash
 
+NOCOLOR="\033[0m"
+GREEN="\033[0;32m"
+
 project_config() {
     echo ""
     read -r -p "Project: " project
     read -r -p "Name: " name
 }
+
+echo "project is $project"
+echo "name is $name"
+pwd
 
 set_env() {
     # shellcheck source=./env.sh
