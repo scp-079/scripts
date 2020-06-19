@@ -49,7 +49,7 @@ if [ $# -eq 1 ];then
     tar xf ~/scp-079-"$bot".tar.gz
     update_scripts
 
-    echo "$bot $bot" | bash ~/scp-079/scripts/rebuild.sh
+    echo -e "$bot\n$bot" | bash ~/scp-079/scripts/rebuild.sh
     set_env
     echo -e "${GREEN}Bot ${bot^^}'s backup restored!${NOCOLOR}\n"
 
@@ -72,10 +72,8 @@ update_scripts
 shopt -s nullglob
 for bot in ~/scp-079/*; do
     bot=$(basename "$bot")
-    # TODO
-    echo "bot is $bot"
     if [ "$bot" != "scripts" ] && [ "$bot" != "venv" ] && ! [[ "$bot" =~ ^(conda)$ ]]; then
-        echo "$bot $bot" | bash ~/scp-079/scripts/rebuild.sh
+        echo -e "$bot\n$bot" | bash ~/scp-079/scripts/rebuild.sh
     fi
 done
 shopt -u nullglob
