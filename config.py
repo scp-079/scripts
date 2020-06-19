@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import logging
-import re
 from configparser import RawConfigParser
 from cryptography.fernet import Fernet
 from os.path import expanduser, exists
@@ -214,9 +213,9 @@ def main() -> bool:
 
         # Replace
         for key in replace_dict:
-            pattern = fr"{key}.?=.?\[DATA EXPUNGED\]"
-            replacement = f"{key} = {replace_dict[key]}"
-            config_text = re.sub(pattern, replacement, config_text)
+            old = f"{key} = [DATA EXPUNGED]"
+            new = f"{key} = {replace_dict[key]}"
+            config_text = config_text.replace(old, new)
 
         # Write bot config.ini
         with open(path, "w") as f:
