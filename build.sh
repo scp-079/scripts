@@ -1,8 +1,8 @@
 #!/bin/bash
 
 NOCOLOR="\033[0m"
-RED="\033[0;31m"
 GREEN="\033[0;32m"
+RED="\033[0;31m"
 
 if [ "$(id -u)" -eq 0 ]; then
 	echo -e "\n${RED}Please DO NOT run the script as root user!${NOCOLOR}\n"

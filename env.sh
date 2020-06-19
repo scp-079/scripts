@@ -26,6 +26,9 @@ alias show="bash ~/scp-079/scripts/show.sh"
 alias shut="bash ~/scp-079/scripts/shut.sh"
 alias upgrade="bash ~/scp-079/scripts/upgrade.sh"
 
+alias backup="bash ~/scp-079/scripts/backup.sh"
+alias restore="bash ~/scp-079/scripts/restore.sh"
+
 touch ~/.bashrc
 
 if ! grep -q "source ~/scp-079/scripts/env.sh" ~/.bashrc; then
