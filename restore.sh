@@ -73,7 +73,7 @@ shopt -s nullglob
 for bot in ~/scp-079/*; do
     bot=$(basename "$bot")
     echo "bot is $bot"
-    if [ "$bot" != "venv" ] && ! [[ "$bot" =~ ^(conda)$ ]]; then
+    if [ "$bot" != "scripts" ] && [ "$bot" != "venv" ] && ! [[ "$bot" =~ ^(conda)$ ]]; then
         echo "$bot $bot" | bash ~/scp-079/scripts/rebuild.sh
     fi
 done
