@@ -6,7 +6,11 @@ GREEN="\033[0;32m"
 echo -e "\n${GREEN}Updating the scripts...${NOCOLOR}\n"
 cd ~/scp-079/scripts || return || exit
 git pull
-python3 -m venv venv
+
+if [ ! -d "venv" ]; then
+    python3 -m venv venv
+fi
+
 source venv/bin/activate
 pip install -U pip
 pip install -U setuptools wheel

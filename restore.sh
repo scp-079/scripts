@@ -15,7 +15,10 @@ update_scripts() {
         git pull
     fi
 
-    python3 -m venv venv
+    if [ ! -d "venv" ]; then
+        python3 -m venv venv
+    fi
+
     source venv/bin/activate
     pip install -U pip
     pip install -U setuptools wheel
@@ -69,6 +72,7 @@ update_scripts
 shopt -s nullglob
 for bot in ~/scp-079/*; do
     bot=$(basename "$bot")
+    echo "bot is $bot"
     if [ "$bot" != "venv" ] && ! [[ "$bot" =~ ^(conda)$ ]]; then
         echo "$bot $bot" | bash ~/scp-079/scripts/rebuild.sh
     fi
