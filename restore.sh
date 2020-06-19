@@ -63,6 +63,7 @@ fi
 echo -e "\n${GREEN}Restoring all bots' backup...${NOCOLOR}"
 cd ~ || return || exit
 tar xf ~/scp-079.tar.gz
+cd ~/scp-079 || return || exit
 update_scripts
 
 shopt -s nullglob
