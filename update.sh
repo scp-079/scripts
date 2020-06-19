@@ -23,7 +23,7 @@ deactivate
 
 if [ "$bot" = "scripts" ]; then
     echo -e "\n${GREEN}Scripts Updated!${NOCOLOR}\n"
-    exit
+    return || exit
 fi
 
 cd ~/scp-079/"$bot" || return || exit
