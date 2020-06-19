@@ -12,7 +12,7 @@ else
 fi
 
 echo -e "${GREEN}Updating the scripts...${NOCOLOR}\n"
-cd ~/scp-079/scripts || exit
+cd ~/scp-079/scripts || return || exit
 git pull
 python3 -m venv venv
 source venv/bin/activate
@@ -26,7 +26,7 @@ if [ "$bot" = "scripts" ]; then
     exit
 fi
 
-cd ~/scp-079/"$bot" || exit
+cd ~/scp-079/"$bot" || return || exit
 
 git pull
 
