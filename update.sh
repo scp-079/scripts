@@ -11,7 +11,8 @@ else
     read -r -p "Choose a object: " bot
 fi
 
-echo -e "${GREEN}Updating the scripts...${NOCOLOR}\n"
+echo "------------------------"
+echo -e "\n${GREEN}Updating the scripts...${NOCOLOR}\n"
 cd ~/scp-079/scripts || return || exit
 git pull
 python3 -m venv venv
