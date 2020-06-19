@@ -67,7 +67,7 @@ tar xf ~/scp-079.tar.gz
 shopt -s nullglob
 for bot in ~/scp-079/*; do
     bot=$(basename "$bot")
-    if [ "$bot" != "scripts" ] && [ "$bot" != "venv" ] && ! [[ "$bot" =~ ^(conda)$ ]]; then
+    if [ "$bot" != "venv" ] && ! [[ "$bot" =~ ^(conda)$ ]]; then
         bash ~/scp-079/scripts/rebuild.sh "$bot" "$bot"
     fi
 done
