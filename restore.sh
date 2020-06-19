@@ -5,7 +5,7 @@ GREEN="\033[0;32m"
 RED="\033[0;31m"
 
 update_scripts() {
-    echo -e "\n${GREEN}Updating the scripts...${NOCOLOR}"
+    echo -e "\n${GREEN}Updating the scripts...${NOCOLOR}\n"
 
     if [ ! -d "scripts" ]; then
         git clone https://github.com/scp-079/scripts.git scripts
