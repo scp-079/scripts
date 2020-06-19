@@ -5,7 +5,7 @@ GREEN="\033[0;32m"
 RED="\033[0;31m"
 
 update_scripts() {
-    echo -e "\n${GREEN}Updating the scripts...${NOCOLOR}\n"
+    echo -e "\n${GREEN}Updating the scripts...${NOCOLOR}"
 
     if [ ! -d "scripts" ]; then
         git clone https://github.com/scp-079/scripts.git scripts
@@ -44,9 +44,9 @@ if [ $# -eq 1 ];then
     mkdir -p ~/scp-079
     cd ~/scp-079 || return || exit
     tar xf ~/scp-079-"$bot".tar.gz
-
     update_scripts
-    bash ~/scp-079/scripts/rebuild.sh "$bot" "$bot"
+
+    echo "$bot $bot" | bash ~/scp-079/scripts/rebuild.sh
     set_env
     echo -e "${GREEN}Bot ${bot^^}'s backup restored!${NOCOLOR}\n"
 
@@ -63,12 +63,13 @@ fi
 echo -e "\n${GREEN}Restoring all bots' backup...${NOCOLOR}"
 cd ~ || return || exit
 tar xf ~/scp-079.tar.gz
+update_scripts
 
 shopt -s nullglob
 for bot in ~/scp-079/*; do
     bot=$(basename "$bot")
     if [ "$bot" != "venv" ] && ! [[ "$bot" =~ ^(conda)$ ]]; then
-        bash ~/scp-079/scripts/rebuild.sh "$bot" "$bot"
+        echo "$bot $bot" | bash ~/scp-079/scripts/rebuild.sh
     fi
 done
 shopt -u nullglob

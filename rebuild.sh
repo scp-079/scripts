@@ -1,16 +1,10 @@
 #!/bin/bash
 
-if [ $# -eq 1 ];then
-    project=$1
-else
+project_config() {
+    echo ""
     read -r -p "Project: " project
-fi
-
-if [ $# -eq 2 ];then
-    name=$2
-else
     read -r -p "Name: " name
-fi
+}
 
 set_env() {
     # shellcheck source=./env.sh
@@ -57,6 +51,7 @@ WantedBy=default.target" > ~/.config/systemd/user/"$name".service
 }
 
 build_begin() {
+    project_config
     set_env
     cd ~/scp-079/"$name" || exit
     create_venv
