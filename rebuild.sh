@@ -9,6 +9,7 @@ project_config() {
     read -r -p "Name: " name
 }
 
+# TODO
 echo "project is $project"
 echo "name is $name"
 pwd
