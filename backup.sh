@@ -16,5 +16,5 @@ fi
 echo -e "\n${GREEN}Starting to backup all bots...${NOCOLOR}"
 mkdir -p ~/scp-079
 cd ~ || exit
-tar --exclude="venv" ~/scp-079.tar.gz scp-079
+tar --exclude="venv" -czf ~/scp-079.tar.gz scp-079
 echo -e "${GREEN}All bots backup finished!${NOCOLOR}\n"
