@@ -20,8 +20,6 @@ pip install -U pip
 pip install -U setuptools wheel
 pip install -r requirements.txt
 deactivate
-# shellcheck source=./env.sh
-source ~/scp-079/scripts/env.sh
 
 if [ "$bot" = "scripts" ]; then
     echo -e "\n${GREEN}Scripts Updated!${NOCOLOR}\n"
