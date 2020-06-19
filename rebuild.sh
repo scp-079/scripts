@@ -20,6 +20,8 @@ set_env() {
 }
 
 create_venv() {
+    # TODO
+    echo "create venv $(pwd)"
     if [ ! -d "venv" ] && [ "$project" != "noporn" ]; then
         echo -e "\n${GREEN}Creating the virtual environment without system site packages...${NOCOLOR}"
         python3 -m venv venv
