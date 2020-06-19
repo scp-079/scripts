@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import logging
 import re
 from configparser import RawConfigParser
 from cryptography.fernet import Fernet
@@ -8,17 +9,141 @@ from os.path import expanduser, exists
 from secrets import choice
 from sys import argv
 from string import ascii_letters, digits
+from typing import Optional
+
+# Enable logging
+logging.basicConfig(
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    level=logging.WARNING,
+    filename="log",
+    filemode="a"
+)
+logger = logging.getLogger(__name__)
+
+
+def check_value(section: str, key: str, value: str, global_config: bool = False) -> bool:
+    # Check the value
+    result = False
+
+    try:
+        if global_config:
+            prefix = " [global] "
+        else:
+            prefix = " "
+
+        if section == "bots":
+            return check_bots(key, value, prefix)
+
+        if section == "channels":
+            return check_channels(key, value, prefix)
+
+        result = True
+    except Exception as e:
+        logger.warning(f"Check value error: {e}", exc_info=True)
+
+    return result
+
+
+def check_bots(key: str, value: str, prefix: str) -> bool:
+    # Check the value in bots section
+    result = False
+
+    try:
+        value = get_int(value)
+
+        if not value or value <= 0:
+            print(f"[ERROR]{prefix}[bots] {key} - should be a positive integer")
+            return False
+
+        result = True
+    except Exception as e:
+        logger.warning(f"Check bots error: {e}", exc_info=True)
+
+    return result
+
+
+def check_channels(key: str, value: str, prefix: str) -> bool:
+    # Check the value in channels section
+    result = False
+
+    try:
+        value = get_int(value)
+
+        if not value or value >= 0:
+            print(f"[ERROR]{prefix}[channels] {key} - should be a negative integer")
+            return False
+
+        if key.endswith("channel_id") and not str(value).startswith("-100"):
+            print(f"[ERROR]{prefix}[channels] {key} - please use a channel instead")
+            return False
+
+        if not str(value).startswith("-100"):
+            print(f"[ERROR]{prefix}[channels] {key} - please use a supergroup instead")
+            return False
+
+        result = True
+    except Exception as e:
+        logger.warning(f"Check channels error: {e}", exc_info=True)
+
+    return result
 
 
 def generate_password() -> str:
+    # Generate a random password
     return "".join(choice(ascii_letters + digits + "!@#$%^&*-+") for _ in range(16))
 
 
 def generate_key() -> str:
+    # Generate a required key
     return Fernet.generate_key().decode()
 
 
+def get_input(section: str, key: str) -> str:
+    # Get input value
+    result = "[DATA EXPUNGED]"
+
+    try:
+        while not result or result == "[DATA EXPUNGED]" or not check_value(section, key, result):
+            result = input(f"Please input [{section}] {key}: ")
+    except Exception as e:
+        logger.warning(f"Get input error: {e}", exc_info=True)
+
+    return result
+
+
+def get_int(text: str) -> Optional[int]:
+    # Get a int from a string
+    result = None
+
+    try:
+        result = int(text)
+    except Exception as e:
+        logger.info(f"Get int error: {e}", exc_info=True)
+
+    return result
+
+
+def get_value(section: str, key: str) -> str:
+    # Get key's value
+    result = "[DATA EXPUNGED]"
+
+    try:
+        if key not in {"key", "password"}:
+            return get_input(section, key)
+
+        if key == "key":
+            return generate_key()
+
+        if key == "password":
+            return generate_password()
+    except Exception as e:
+        logger.warning(f"Get value error: {e}", exc_info=True)
+
+    return result
+
+
 def main() -> bool:
+    # Main function
     result = False
 
     try:
@@ -31,14 +156,16 @@ def main() -> bool:
 
         # Get bot
         bot = argv[1]
+
+        # Get bot config path
         path = expanduser(f"~/scp-079/{bot}/config.ini")
 
-        # Check the file
+        # Check the bot file
         if not exists(path):
             print(f"Config file {path} does not exist!")
             return False
 
-        # Get global config
+        # Get global config path
         global_path = expanduser(f"~/scp-079/scripts/config.ini")
 
         # Check the global file
@@ -56,32 +183,27 @@ def main() -> bool:
 
         # Check values
         for section in config:
+            # Append new section in global config
             if not global_config.has_section(section):
                 global_config[section] = {}
 
+            # Check keys
             for key in config[section]:
+                # Bot's config.ini has default value
                 if config[section][key] != default:
                     if global_config[section].get(key, default) == default:
                         global_config[section][key] = config[section][key]
                     continue
 
+                # Global config.ini doesn't have default value
                 if global_config[section].get(key, default) == default:
-                    if key not in {"key", "password"}:
-                        value = ""
-                        while not value:
-                            value = input(f"Please input [{section}] {key}: ")
-                    elif key == "key":
-                        value = generate_key()
-                    elif key == "password":
-                        value = generate_password()
-                    else:
-                        value = "[DATA EXPUNGED]"
+                    value = get_value(section, key)
                 elif key == "bot_token":
-                    value = ""
-                    while not value:
-                        value = input(f"Please input [{section}] {key}: ")
-                else:
+                    value = get_input(section, key)
+                elif check_value(section, key, global_config[section][key], True):
                     value = global_config[section][key]
+                else:
+                    value = get_input(section, key)
 
                 replace_dict[key] = value
                 global_config[section][key] = value
@@ -109,7 +231,8 @@ def main() -> bool:
 
         result = True
     except Exception as e:
-        print(f"[ERROR] {e}")
+        print(f"[ERROR] please check the log file ~/scp-079/scripts/log")
+        logger.warning(f"Main error: {e}", exc_info=True)
 
     return result
 
