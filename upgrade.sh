@@ -4,7 +4,7 @@ NOCOLOR="\033[0m"
 GREEN="\033[0;32m"
 
 echo -e "\n${GREEN}Updating the scripts...${NOCOLOR}\n"
-cd ~/scp-079/scripts || exit
+cd ~/scp-079/scripts || return || exit
 git pull
 python3 -m venv venv
 source venv/bin/activate
@@ -12,6 +12,8 @@ pip install -U pip
 pip install -U setuptools wheel
 pip install -r requirements.txt
 deactivate
+# shellcheck source=./env.sh
+source ~/scp-079/scripts/env.sh
 
 shopt -s nullglob
 for bot in ~/scp-079/*; do
@@ -19,7 +21,7 @@ for bot in ~/scp-079/*; do
     if [ "$bot" != "scripts" ] && [ "$bot" != "venv" ] && ! [[ "$bot" =~ ^(conda)$ ]]; then
         echo -e "\n${GREEN}Updating the bot ${bot^^}...${NOCOLOR}\n"
         
-        cd ~/scp-079/"$bot" || exit
+        cd ~/scp-079/"$bot" || return || exit
         
         git pull
         
