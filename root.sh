@@ -24,4 +24,8 @@ echo -e "\n${GREEN}Installing dependencies...${NOCOLOR}\n"
 apt install caffe-cpu fonts-arphic-gkai00mp fonts-freefont-ttf libzbar0 opencc tesseract-ocr tesseract-ocr-chi-sim tesseract-ocr-chi-tra -y
 sed -i 's/skimage.img_as_float(skimage.io.imread(filename, as_grey=not color))/skimage.img_as_float(skimage.io.imread(filename, as_gray=not color, plugin="pil"))/g' /usr/lib/python3/dist-packages/caffe/io.py
 
-echo -e "\n${GREEN}Done!${NOCOLOR}\n"
+echo -e "\n${GREEN}Setting time zone to UTC...${NOCOLOR}"
+echo "Etc/UTC" > /etc/timezone
+dpkg-reconfigure -f noninteractive tzdata
+
+echo -e "${GREEN}Done!${NOCOLOR}\n"
