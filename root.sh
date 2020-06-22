@@ -6,8 +6,8 @@ RED="\033[0;31m"
 YELLOW="\033[1;33m"
 
 if [ ! "$(id -u)" -eq 0 ]; then
-	echo -e "\n${RED}Please run the script as root user!${NOCOLOR}\n"
-	exit
+    echo -e "\n${RED}Please run the script as root user!${NOCOLOR}\n"
+    exit
 fi
 
 echo -e "\nWe will add a user called ${YELLOW}scp${NOCOLOR}, please set a strong password...\n"
