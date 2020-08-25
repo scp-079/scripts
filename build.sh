@@ -23,7 +23,7 @@ update_scripts() {
         git pull
     fi
 
-    if [ ! -d "venv" ] || [ ! -d "venv/bin/activate" ]; then
+    if [ ! -d "venv" ] || [ ! -f "venv/bin/activate" ]; then
         python3 -m venv venv
     fi
 
@@ -77,7 +77,10 @@ create_venv() {
     deactivate
 }
 
+# TODO 适应新的 data 文件夹结构
 bot_config() {
+    mkdir -p data/config
+
     if [ ! -f "config.ini" ]; then
         cp config.ini.example config.ini
     fi

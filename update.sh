@@ -31,10 +31,10 @@ source ~/scp-079/scripts/env.sh
 
 if [ "$bot" = "scripts" ]; then
     echo -e "\n${GREEN}Scripts Updated!${NOCOLOR}\n"
-    return || exit
+    exit
 fi
 
-cd ~/scp-079/"$bot" || return || exit
+cd ~/scp-079/"$bot" || exit
 
 git pull
 
