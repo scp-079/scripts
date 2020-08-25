@@ -3,6 +3,7 @@
 NOCOLOR="\033[0m"
 GREEN="\033[0;32m"
 
+# TODO 适应新的 data 文件夹结构
 if [ $# -eq 1 ];then
     bot=$1
     cp /dev/null ~/scp-079/"$bot"/log

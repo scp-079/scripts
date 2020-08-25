@@ -157,7 +157,11 @@ def main() -> bool:
         bot = argv[1]
 
         # Get bot config path
-        path = expanduser(f"~/scp-079/{bot}/config.ini")
+        # TODO 适应新的 data 文件夹结构
+        if bot not in {"id", "status"}:
+            path = expanduser(f"~/scp-079/{bot}/config.ini")
+        else:
+            path = expanduser(f"~/scp-079/{bot}/data/config/config.ini")
 
         # Check the bot file
         if not exists(path):
@@ -172,7 +176,7 @@ def main() -> bool:
             print(f"[ERROR] Global config file {global_path} does not exist!")
             return False
 
-        # Get bot's config
+        # Get the bot's config
         config = RawConfigParser()
         config.read(path)
 

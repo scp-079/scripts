@@ -3,6 +3,7 @@
 NOCOLOR="\033[0m"
 GREEN="\033[0;32m"
 
+# TODO 适应新的 data 文件夹结构
 shopt -s nullglob
 for bot in ~/scp-079/*; do
     bot=$(basename "$bot")

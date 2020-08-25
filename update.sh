@@ -14,7 +14,7 @@ fi
 echo "------------------------"
 
 echo -e "\n${GREEN}Updating the scripts...${NOCOLOR}\n"
-cd ~/scp-079/scripts || return || exit
+cd ~/scp-079/scripts || exit
 git pull
 
 if [ ! -d "venv" ]; then

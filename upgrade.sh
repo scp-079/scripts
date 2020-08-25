@@ -4,7 +4,7 @@ NOCOLOR="\033[0m"
 GREEN="\033[0;32m"
 
 echo -e "\n${GREEN}Updating the scripts...${NOCOLOR}\n"
-cd ~/scp-079/scripts || return || exit
+cd ~/scp-079/scripts || exit
 git pull
 
 if [ ! -d "venv" ]; then
@@ -25,7 +25,7 @@ for bot in ~/scp-079/*; do
     if [ "$bot" != "scripts" ] && [ "$bot" != "venv" ] && ! [[ "$bot" =~ ^(conda)$ ]]; then
         echo -e "\n${GREEN}Updating the bot ${bot^^}...${NOCOLOR}\n"
         
-        cd ~/scp-079/"$bot" || return || exit
+        cd ~/scp-079/"$bot" || exit
         
         git pull
         
