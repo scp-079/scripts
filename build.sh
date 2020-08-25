@@ -5,8 +5,8 @@ GREEN="\033[0;32m"
 RED="\033[0;31m"
 
 if [ "$(id -u)" -eq 0 ]; then
-	echo -e "\n${RED}Please DO NOT run the script as root user!${NOCOLOR}\n"
-	return || exit
+    echo -e "\n${RED}Please DO NOT run the script as root user!${NOCOLOR}\n"
+    return || exit
 fi
 
 mkdir -p ~/scp-079
