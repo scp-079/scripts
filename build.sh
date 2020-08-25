@@ -23,7 +23,7 @@ update_scripts() {
         git pull
     fi
 
-    if [ ! -d "venv" ]; then
+    if [ ! -d "venv" ] || [ ! -d "venv/bin/activate" ]; then
         python3 -m venv venv
     fi
 
