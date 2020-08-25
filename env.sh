@@ -14,7 +14,7 @@ alias status="bash ~/scp-079/scripts/status.sh"
 alias start="bash ~/scp-079/scripts/start.sh"
 alias stop="bash ~/scp-079/scripts/stop.sh"
 alias try="bash ~/scp-079/scripts/try.sh"
-alias update="source ~/scp-079/scripts/update.sh"
+alias update="bash ~/scp-079/scripts/update.sh"
 
 alias check="bash ~/scp-079/scripts/check.sh"
 alias clear="bash ~/scp-079/scripts/clear.sh"
