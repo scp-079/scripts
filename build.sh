@@ -73,6 +73,11 @@ create_venv() {
     source venv/bin/activate
     pip install -U pip
     pip install -U setuptools wheel
+
+    if [ "$project" == "tip" ]; then
+        pip install -U pybind11
+    fi
+
     pip install -r requirements.txt
     deactivate
 }
