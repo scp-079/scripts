@@ -38,6 +38,7 @@ make
 make test
 make install
 make testinstall
+cd ..
 rm -rf re2
 
 # Set timezone
