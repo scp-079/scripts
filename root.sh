@@ -38,6 +38,7 @@ make
 make test
 make install
 make testinstall
+rm -rf re2
 
 # Set timezone
 echo -e "\n${GREEN}Setting time zone to UTC...${NOCOLOR}"
