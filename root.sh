@@ -32,14 +32,13 @@ apt install caffe-cpu fonts-arphic-gkai00mp fonts-freefont-ttf libzbar0 opencc t
 sed -i 's/skimage.img_as_float(skimage.io.imread(filename, as_grey=not color))/skimage.img_as_float(skimage.io.imread(filename, as_gray=not color, plugin="pil"))/g' /usr/lib/python3/dist-packages/caffe/io.py
 
 # Install google re2
+cd ~ || exit
 git clone https://github.com/google/re2.git
 cd re2 || exit
 make
 make test
 make install
 make testinstall
-cd ..
-rm -rf re2
 
 # Set timezone
 echo -e "\n${GREEN}Setting time zone to UTC...${NOCOLOR}"
