@@ -39,6 +39,7 @@ make
 make test
 make install
 make testinstall
+ldconfig
 
 # Set timezone
 echo -e "\n${GREEN}Setting time zone to UTC...${NOCOLOR}"
