@@ -39,5 +39,3 @@ for bot in ~/scp-079/*; do
     fi
 done
 shopt -u nullglob
-
-cd ~ || exit
