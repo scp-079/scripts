@@ -8,4 +8,11 @@ fi
 
 cd ~/scp-079/"$bot" || exit
 
-less log
+# TODO TEMP
+if [ -f "examples/config.ini" ]; then
+    LOG_PATH="log/log"
+else
+    LOG_PATH="log"
+fi
+
+less "$LOG_PATH"
