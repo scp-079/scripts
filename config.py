@@ -10,6 +10,15 @@ from sys import argv
 from string import ascii_letters, digits
 from typing import Optional
 
+# Path variables
+CONFIG_PATH = "data/config/config.ini"
+
+# TODO TEMP
+if exists("examples/config.ini"):
+    CONFIG_PATH = "data/config/config.ini"
+else:
+    CONFIG_PATH = "config.ini"
+
 # Enable logging
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
@@ -157,11 +166,7 @@ def main() -> bool:
         bot = argv[1]
 
         # Get bot config path
-        # TODO 适应新的 data 文件夹结构
-        if bot not in {"id", "status"}:
-            path = expanduser(f"~/scp-079/{bot}/config.ini")
-        else:
-            path = expanduser(f"~/scp-079/{bot}/data/config/config.ini")
+        path = expanduser(f"~/scp-079/{bot}/{CONFIG_PATH}")
 
         # Check the bot file
         if not exists(path):

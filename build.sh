@@ -4,6 +4,51 @@ NOCOLOR="\033[0m"
 GREEN="\033[0;32m"
 RED="\033[0;31m"
 
+CONFIG_EXAMPLE_PATH="examples/config.ini"
+CONFIG_PATH="data/config/config.ini"
+JOIN_EXAMPLE_PATH="examples/join.txt"
+JOIN_PATH="data/config/join.txt"
+REPORT_EXAMPLE_PATH="examples/report.txt"
+REPORT_PATH="data/config/report.txt"
+START_EXAMPLE_PATH="examples/start.txt"
+START_PATH="data/config/start.txt"
+
+# TODO TEMP
+if [ -f "examples/config.ini" ]; then
+    CONFIG_EXAMPLE_PATH="examples/config.ini"
+    CONFIG_PATH="data/config/config.ini"
+else
+    CONFIG_EXAMPLE_PATH="config.ini.example"
+    CONFIG_PATH="config.ini"
+fi
+
+# TODO TEMP
+if [ -f "examples/join.txt" ]; then
+    JOIN_EXAMPLE_PATH="examples/join.txt"
+    JOIN_PATH="data/config/join.txt"
+else
+    JOIN_EXAMPLE_PATH="join.txt.example"
+    JOIN_PATH="join.txt"
+fi
+
+# TODO TEMP
+if [ -f "examples/report.txt" ]; then
+    REPORT_EXAMPLE_PATH="examples/report.txt"
+    REPORT_PATH="data/config/report.txt"
+else
+    REPORT_EXAMPLE_PATH="report.txt.example"
+    REPORT_PATH="report.txt"
+fi
+
+# TODO TEMP
+if [ -f "examples/start.txt" ]; then
+    START_EXAMPLE_PATH="examples/start.txt"
+    START_PATH="data/config/start.txt"
+else
+    START_EXAMPLE_PATH="start.txt.example"
+    START_PATH="start.txt"
+fi
+
 if [ "$(id -u)" -eq 0 ]; then
     echo -e "\n${RED}Please DO NOT run the script as root user!${NOCOLOR}\n"
     return || exit
@@ -82,16 +127,15 @@ create_venv() {
     deactivate
 }
 
-# TODO 适应新的 data 文件夹结构
 bot_config() {
     mkdir -p data/config
 
-    if [ ! -f "config.ini" ]; then
-        cp config.ini.example config.ini
+    if [ ! -f "$CONFIG_PATH" ]; then
+        cp "$CONFIG_EXAMPLE_PATH" "$CONFIG_PATH"
     fi
 
     if [ ! -f ~/scp-079/scripts/config.ini ]; then
-        cp config.ini ~/scp-079/scripts/config.ini
+        cp "$CONFIG_PATH" ~/scp-079/scripts/config.ini
     fi
 
     cd ~/scp-079/scripts || exit
@@ -103,21 +147,30 @@ bot_config() {
     bash ~/scp-079/scripts/config.sh "$name"
     echo -e "\n${GREEN}Config updated!${NOCOLOR}\n"
 
-    if [ -f "report.txt.example" ] && [ ! -f "report.txt" ]; then
-        cp report.txt.example report.txt
+    if [ -f "$JOIN_EXAMPLE_PATH" ] && [ ! -f "$JOIN_PATH" ]; then
+        cp "$JOIN_EXAMPLE_PATH" "$JOIN_PATH"
     fi
 
-    if [ -f "report.txt" ]; then
-        vim report.txt
+    if [ -f "$JOIN_PATH" ]; then
+        vim "$JOIN_PATH"
+        echo -e "${GREEN}Join template updated!${NOCOLOR}\n"
+    fi
+
+    if [ -f "$REPORT_EXAMPLE_PATH" ] && [ ! -f "$REPORT_PATH" ]; then
+        cp "$REPORT_EXAMPLE_PATH" "$REPORT_PATH"
+    fi
+
+    if [ -f "$REPORT_PATH" ]; then
+        vim "$REPORT_PATH"
         echo -e "${GREEN}Report template updated!${NOCOLOR}\n"
     fi
     
-    if [ -f "start.txt.example" ] && [ ! -f "start.txt" ]; then
-        cp start.txt.example start.txt
+    if [ -f "$START_EXAMPLE_PATH" ] && [ ! -f "$START_PATH" ]; then
+        cp "$START_EXAMPLE_PATH" "$START_PATH"
     fi
 
-    if [ -f "start.txt" ]; then
-        vim start.txt
+    if [ -f "$START_PATH" ]; then
+        vim "$START_PATH"
         echo -e "${GREEN}Start template updated!${NOCOLOR}\n"
     fi
 }
@@ -131,8 +184,9 @@ After=default.target
 
 [Service]
 WorkingDirectory=/home/$(whoami)/scp-079/$name
-ExecStart=/home/$(whoami)/scp-079/$name/venv/bin/python main.py
-Restart=on-abort
+ExecStart=/home/$(whoami)/scp-079/$name/venv/bin/python -u main.py
+Restart=always
+RestartSec=15
 
 [Install]
 WantedBy=default.target" > ~/.config/systemd/user/"$name".service
