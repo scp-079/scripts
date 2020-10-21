@@ -3,7 +3,7 @@
 NOCOLOR="\033[0m"
 GREEN="\033[0;32m"
 
-LOG_PATH="log/log"
+LOG_PATH="data/log/log"
 
 if [ $# -eq 1 ];then
     bot=$1
@@ -11,7 +11,7 @@ if [ $# -eq 1 ];then
 
     # TODO TEMP
     if [ -f "examples/config.ini" ]; then
-        LOG_PATH="log/log"
+        LOG_PATH="data/log/log"
     else
         LOG_PATH="log"
     fi
@@ -30,7 +30,7 @@ for bot in ~/scp-079/*; do
 
         # TODO TEMP
         if [ -f "examples/config.ini" ]; then
-            LOG_PATH="log/log"
+            LOG_PATH="data/log/log"
         else
             LOG_PATH="log"
         fi

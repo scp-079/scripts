@@ -3,7 +3,7 @@
 NOCOLOR="\033[0m"
 GREEN="\033[0;32m"
 
-LOG_PATH="log/log"
+LOG_PATH="data/log/log"
 
 shopt -s nullglob
 for bot in ~/scp-079/*; do
@@ -14,7 +14,7 @@ for bot in ~/scp-079/*; do
 
         # TODO TEMP
         if [ -f "examples/config.ini" ]; then
-            LOG_PATH="log/log"
+            LOG_PATH="data/log/log"
         else
             LOG_PATH="log"
         fi
