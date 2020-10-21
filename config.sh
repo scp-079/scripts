@@ -1,12 +1,20 @@
 #!/bin/bash
 
+CONFIG_PATH="data/config/config.ini"
+
+# TODO TEMP
+if [ -f "examples/config.ini" ]; then
+    CONFIG_PATH="data/config/config.ini"
+else
+    CONFIG_PATH="config.ini"
+fi
+
 if [ $# -eq 1 ];then
     bot=$1
 else
     read -r -p "Choose a bot: " bot
 fi
 
-# TODO 适应新的 data 文件夹结构
 cd ~/scp-079/"$bot" || exit
 
-vim config.ini
+vim "$CONFIG_PATH"
