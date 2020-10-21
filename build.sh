@@ -4,51 +4,6 @@ NOCOLOR="\033[0m"
 GREEN="\033[0;32m"
 RED="\033[0;31m"
 
-CONFIG_EXAMPLE_PATH="examples/config.ini"
-CONFIG_PATH="data/config/config.ini"
-JOIN_EXAMPLE_PATH="examples/join.txt"
-JOIN_PATH="data/config/join.txt"
-REPORT_EXAMPLE_PATH="examples/report.txt"
-REPORT_PATH="data/config/report.txt"
-START_EXAMPLE_PATH="examples/start.txt"
-START_PATH="data/config/start.txt"
-
-# TODO TEMP
-if [ -f "examples/config.ini" ]; then
-    CONFIG_EXAMPLE_PATH="examples/config.ini"
-    CONFIG_PATH="data/config/config.ini"
-else
-    CONFIG_EXAMPLE_PATH="config.ini.example"
-    CONFIG_PATH="config.ini"
-fi
-
-# TODO TEMP
-if [ -f "examples/join.txt" ]; then
-    JOIN_EXAMPLE_PATH="examples/join.txt"
-    JOIN_PATH="data/config/join.txt"
-else
-    JOIN_EXAMPLE_PATH="join.txt.example"
-    JOIN_PATH="join.txt"
-fi
-
-# TODO TEMP
-if [ -f "examples/report.txt" ]; then
-    REPORT_EXAMPLE_PATH="examples/report.txt"
-    REPORT_PATH="data/config/report.txt"
-else
-    REPORT_EXAMPLE_PATH="report.txt.example"
-    REPORT_PATH="report.txt"
-fi
-
-# TODO TEMP
-if [ -f "examples/start.txt" ]; then
-    START_EXAMPLE_PATH="examples/start.txt"
-    START_PATH="data/config/start.txt"
-else
-    START_EXAMPLE_PATH="start.txt.example"
-    START_PATH="start.txt"
-fi
-
 if [ "$(id -u)" -eq 0 ]; then
     echo -e "\n${RED}Please DO NOT run the script as root user!${NOCOLOR}\n"
     return || exit
@@ -129,6 +84,42 @@ create_venv() {
 
 bot_config() {
     mkdir -p data/config
+
+    # TODO TEMP
+    if [ -f "examples/config.ini" ]; then
+        CONFIG_EXAMPLE_PATH="examples/config.ini"
+        CONFIG_PATH="data/config/config.ini"
+    else
+        CONFIG_EXAMPLE_PATH="config.ini.example"
+        CONFIG_PATH="config.ini"
+    fi
+
+    # TODO TEMP
+    if [ -f "examples/join.txt" ]; then
+        JOIN_EXAMPLE_PATH="examples/join.txt"
+        JOIN_PATH="data/config/join.txt"
+    else
+        JOIN_EXAMPLE_PATH="join.txt.example"
+        JOIN_PATH="join.txt"
+    fi
+
+    # TODO TEMP
+    if [ -f "examples/report.txt" ]; then
+        REPORT_EXAMPLE_PATH="examples/report.txt"
+        REPORT_PATH="data/config/report.txt"
+    else
+        REPORT_EXAMPLE_PATH="report.txt.example"
+        REPORT_PATH="report.txt"
+    fi
+
+    # TODO TEMP
+    if [ -f "examples/start.txt" ]; then
+        START_EXAMPLE_PATH="examples/start.txt"
+        START_PATH="data/config/start.txt"
+    else
+        START_EXAMPLE_PATH="start.txt.example"
+        START_PATH="start.txt"
+    fi
 
     if [ ! -f "$CONFIG_PATH" ]; then
         cp "$CONFIG_EXAMPLE_PATH" "$CONFIG_PATH"
