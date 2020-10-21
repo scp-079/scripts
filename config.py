@@ -14,7 +14,7 @@ from typing import Optional
 CONFIG_PATH = "data/config/config.ini"
 
 # TODO TEMP
-if exists("examples/config.ini"):
+if exists(f"~/scp-079/{argv[1]}/examples/config.ini"):
     CONFIG_PATH = "data/config/config.ini"
 else:
     CONFIG_PATH = "config.ini"
