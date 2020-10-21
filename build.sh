@@ -4,6 +4,15 @@ NOCOLOR="\033[0m"
 GREEN="\033[0;32m"
 RED="\033[0;31m"
 
+CONFIG_EXAMPLE_PATH="examples/config.ini"
+CONFIG_PATH="data/config/config.ini"
+JOIN_EXAMPLE_PATH="join.txt.example"
+JOIN_PATH="join.txt"
+REPORT_EXAMPLE_PATH="examples/report.txt"
+REPORT_PATH="data/config/report.txt"
+START_EXAMPLE_PATH="start.txt.example"
+START_PATH="start.txt"
+
 if [ "$(id -u)" -eq 0 ]; then
     echo -e "\n${RED}Please DO NOT run the script as root user!${NOCOLOR}\n"
     return || exit

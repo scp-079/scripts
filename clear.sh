@@ -3,6 +3,8 @@
 NOCOLOR="\033[0m"
 GREEN="\033[0;32m"
 
+LOG_PATH="log/log"
+
 if [ $# -eq 1 ];then
     bot=$1
     cd ~/scp-079/"$bot" || exit
@@ -15,7 +17,7 @@ if [ $# -eq 1 ];then
     fi
 
     cp /dev/null "$LOG_PATH"
-    rm -f ~/scp-079/"$bot"/data/log/log-*
+    rm -f log/log-*
     echo -e "\n${GREEN}Bot ${bot^^}'s log files Cleared!${NOCOLOR}\n"
     exit
 fi
@@ -34,7 +36,7 @@ for bot in ~/scp-079/*; do
         fi
 
         cp /dev/null "$LOG_PATH"
-        rm -f ~/scp-079/"$bot"/data/log/log-*
+        rm -f log/log-*
         echo -e "\n${GREEN}Bot ${bot^^}'s log files Cleared!${NOCOLOR}\n"
     fi
 done

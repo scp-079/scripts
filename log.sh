@@ -1,5 +1,7 @@
 #!/bin/bash
 
+LOG_PATH="log/log"
+
 if [ $# -eq 1 ];then
     bot=$1
 else

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+CONFIG_PATH="data/config/config.ini"
+
 if [ $# -eq 1 ];then
     bot=$1
 else
