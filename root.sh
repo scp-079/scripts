@@ -49,5 +49,6 @@ dpkg-reconfigure -f noninteractive tzdata
 # Enable journal storage persistence
 mkdir -p /var/log/journal
 sed -i 's/#Storage=auto/Storage=persistent/g' /etc/systemd/journald.conf
+systemctl restart systemd-journald
 
 echo -e "${GREEN}Done!${NOCOLOR}\n"
