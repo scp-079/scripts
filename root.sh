@@ -43,7 +43,6 @@ ldconfig
 
 # Set timezone
 echo -e "\n${GREEN}Setting time zone to UTC...${NOCOLOR}"
-echo "Etc/UTC" > /etc/timezone
 dpkg-reconfigure -f noninteractive tzdata
 
 # Enable journal storage persistence
