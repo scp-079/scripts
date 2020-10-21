@@ -46,4 +46,8 @@ echo -e "\n${GREEN}Setting time zone to UTC...${NOCOLOR}"
 echo "Etc/UTC" > /etc/timezone
 dpkg-reconfigure -f noninteractive tzdata
 
+# Enable journal storage persistence
+mkdir -p /var/log/journal
+sed -i 's/#Storage=auto/Storage=persistent/g' /etc/systemd/journald.conf
+
 echo -e "${GREEN}Done!${NOCOLOR}\n"

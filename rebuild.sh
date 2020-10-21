@@ -28,6 +28,11 @@ create_venv() {
     source venv/bin/activate
     pip install -U pip
     pip install -U setuptools wheel
+
+    if [ "$project" == "tip" ]; then
+        pip install -U pybind11
+    fi
+
     pip install -r requirements.txt
     deactivate
 }
@@ -41,8 +46,9 @@ After=default.target
 
 [Service]
 WorkingDirectory=/home/$(whoami)/scp-079/$name
-ExecStart=/home/$(whoami)/scp-079/$name/venv/bin/python main.py
-Restart=on-abort
+ExecStart=/home/$(whoami)/scp-079/$name/venv/bin/python -u main.py
+Restart=always
+RestartSec=15
 
 [Install]
 WantedBy=default.target" > ~/.config/systemd/user/"$name".service
