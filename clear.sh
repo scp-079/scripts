@@ -17,7 +17,7 @@ if [ $# -eq 1 ];then
     fi
 
     cp /dev/null "$LOG_PATH"
-    rm -f "$LOG_PATH-*"
+    rm -f "$LOG_PATH-"*
     echo -e "\n${GREEN}Bot ${bot^^}'s log files Cleared!${NOCOLOR}\n"
     exit
 fi
@@ -36,7 +36,7 @@ for bot in ~/scp-079/*; do
         fi
 
         cp /dev/null "$LOG_PATH"
-        rm -f "$LOG_PATH-*"
+        rm -f "$LOG_PATH-"*
         echo -e "\n${GREEN}Bot ${bot^^}'s log files Cleared!${NOCOLOR}\n"
     fi
 done
