@@ -26,7 +26,7 @@ apt install build-essential git python3-dev python3-venv vim -y
 
 # Install dependencies
 echo -e "\n${GREEN}Installing dependencies...${NOCOLOR}\n"
-apt install caffe-cpu fonts-arphic-gkai00mp fonts-freefont-ttf libzbar0 opencc tesseract-ocr tesseract-ocr-chi-sim tesseract-ocr-chi-tra -y
+apt install caffe-cpu fonts-arphic-gkai00mp fonts-freefont-ttf libzbar0 opencc pybind11-dev tesseract-ocr tesseract-ocr-chi-sim tesseract-ocr-chi-tra -y
 
 # Fix bug
 sed -i 's/skimage.img_as_float(skimage.io.imread(filename, as_grey=not color))/skimage.img_as_float(skimage.io.imread(filename, as_gray=not color, plugin="pil"))/g' /usr/lib/python3/dist-packages/caffe/io.py
